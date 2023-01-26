@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        .container{
+            width: 500px;
+            height: 200px;
+            background-color: aquamarine;
+            padding-left: 10px;
+            position: absolute;
+            left: 300px;
+            top: 100px;
+
+        }
+        .cont1{
+            width: 100%;
+            height: 25%;
+            display: flex;
+            
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cont1">
+            <p>Кордината X относительно блока: <span class="val1"></span></p>
+        </div>
+        <div class="cont1">
+            <p>Кордината Y относительно блока: <span class="val2"></span></p>
+        </div>
+        <div class="cont1">
+            <p>Кордината X относительно окна: <span class="val3"></span></p>
+        </div>
+        <div class="cont1">
+            <p>Кордината Y относительно окна: <span class="val4"></span></p>
+        </div>
+    </div>
+    <script>
+        
+        let arr = document.querySelectorAll('.cont1');
+        let cont = document.querySelector('.container');
+        console.log(arr);
+        let val1 = document.querySelector('.val1');
+        let val2 = document.querySelector('.val2');
+        let val3 = document.querySelector('.val3');
+        let val4 = document.querySelector('.val4');
+        cont.addEventListener('click', function(e){
+          val1.innerHTML = e.pageX;
+          val2.innerHTML = e.pageY;
+        });
+        document.addEventListener('click', function(e){
+          val3.innerHTML = e.pageX;
+          val4.innerHTML = e.pageY;
+        });
+    </script>
+</body>
+</html>

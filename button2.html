@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            width: 800px;
+            height: 300px;
+            background-color: antiquewhite;
+            border: 2px solid blue;
+            padding: 20px;
+        }
+        .header{
+            width: 800px;
+            height: 50px;
+        }
+        .content{
+            width: 750px;
+            height: 60px;
+            display: flex;
+            
+        }
+        .content1{
+            width: 25%;
+            height: 100%;
+            background-color: rgb(202, 202, 202);
+            padding: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;    
+            border: 2px solid black;
+        }
+        .content2{
+            width: 500px;
+            height: 100%;
+            border: 2px solid black;
+        }
+        .color_div{
+            margin-top: 15px;
+            width: 700px;
+            height: 50px;
+        }
+        .red{
+            color: red;
+            font-size: 1.5rem;
+        }
+        .blue{
+            color:blue;
+            font-size: 1.5rem;
+        }
+        .green{
+            color: green;
+            font-size: 1.5rem;
+        }
+        .ok{
+            width: 300px;
+            height: 60px;
+            position: absolute;
+            left: 380px;
+            top: 240px;
+            border: 1px solid black;
+        }
+        h2{
+            margin: 0;
+            font-size: 1.7rem;
+        }
+        #int{
+            width: 100%;
+            height: 100%;
+            font-size: 2rem;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Типы заголовков:
+                <input type="radio" id="h1">
+                <label for="h1">H1</label>
+                <input type="radio" id="h2">
+                <label for="h2">H2</label>
+                <input type="radio" id="h3">
+                <label for="h3">H3</label>
+            </h2>
+        </div>
+        <div class="content">
+            <div class="content1"><h2>Содержимое:</h2></div>
+             <div class="content2">
+                <input type="text" placeholder="Введите текст заголовка" id="int"> 
+            </div> 
+        </div>
+        <div class="color_div">
+            <h2> Цвет заголовка: 
+            <input type="radio" id="color-red">
+            <label for="color-red"><span class="red">Красный</span></label>
+            <input type="radio" id="color-blue">
+            <label for="color-blue"><span class="blue">Синий</span></label>
+            <input type="radio" id="color-green">
+            <label for="color-green"><span class="green">Зелённый</span></label>
+                </h2>
+        </div>
+        <div class="container2">
+            <button type="button" class="btn btn-success btninc" value="">Создать</button>
+            <button type="button" class="btn btn-danger btndec" value="">Очистить</button>
+        </div>
+        <div class="ok">
+
+        </div>
+    </div>
+    <script>
+        let interval;
+        let interval1;
+        let container = document.querySelector('.container');
+        let inputText = document.querySelector('#int');
+        let btninc = document.querySelector('.btninc');
+        let btndec = document.querySelector('.btndec');
+        let el;
+        let ok = document.querySelector('.ok');
+        let inputH1 = document.querySelector('#h1');
+        let inputH2 = document.querySelector('#h2');
+        let inputH3 = document.querySelector('#h3');
+        let inputC1 = document.querySelector('#color-red');
+        let inputC2 = document.querySelector('#color-blue');
+        let inputC3 = document.querySelector('#color-green');
+        let count = 0;
+        let countC = 0;
+        let offsetX; 
+        let offsety; 
+        let isDrag = false;
+        btninc.addEventListener('click', function(){
+                if(count == 1){
+                    el = document.createElement('h1');
+                    /* let block = document.createElement('div');
+                    block.classlist.add('.ok'); */
+                }
+                if(count == 2){
+                    el = document.createElement('h2');
+                    /* let block = document.createElement('div');
+                    block.classlist.add('.ok'); */
+                }
+                if(count == 3){
+                    el = document.createElement('h3');
+                    /* let block = document.createElement('div');
+                    block.classlist.add('.ok'); */
+                }
+                if(countC == 1){
+                    el.style.color = 'red';
+                }
+                if(countC == 2){
+                    el.style.color = 'blue';
+                }
+                if(countC == 3){
+                    el.style.color = 'green';
+                }
+                el.innerText = inputText.value;
+                ok.append(el);
+        });
+        btndec.addEventListener('click', function(){
+            el.innerText = '';
+            count = 0;
+            countC = 0;
+        });
+        inputH1.addEventListener('click', function(){
+            count++;
+        });
+        inputH2.addEventListener('click', function(){
+            count += 2;
+        });
+        inputH3.addEventListener('click', function(){
+            count += 3;
+        });
+        inputC1.addEventListener('click', function(){
+            countC++;
+        });
+        inputC2.addEventListener('click', function(){
+            countC += 2;
+        });
+        inputC3.addEventListener('click', function(){
+            countC += 3;
+        }); 
+        
+        
+        ok.addEventListener('mousedown', function(e){ 
+            isDrag = true; 
+            offsetX = e.pageX - parseInt(getComputedStyle(ok).left); 
+            offsetY = e.pageY - parseInt(getComputedStyle(ok).top); 
+            console.log('x' + offsetX); 
+            console.log('y' + offsetY); 
+             
+        }); 
+        document.addEventListener('mouseup', () => {isDrag = false}); 
+ 
+        document.addEventListener('mousemove', function(e){ 
+            if(isDrag == true){ 
+                ok.style.left = `calc(${e.pageX}px - ${offsetX}px)`; 
+                ok.style.top = `calc(${e.pageY}px  - ${offsetY}px)`;  
+            } 
+        }); 
+    </script>
+</body>
+</html>
